@@ -1,8 +1,9 @@
 import math
 
-from test_utils import utils
+from alg.test_utils import utils
 
 
+@utils.test_wrapper
 def merge_sort(a):
     return merge_sort_subarray(a, 0, len(a))
 
@@ -30,5 +31,3 @@ def merge_sort_subarray(a, first, last):
         merge_sort_subarray(a, middle, last)
         merge(a, first, middle, last)
     return a
-
-utils.test_sort_fun(merge_sort)

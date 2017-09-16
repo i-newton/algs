@@ -1,7 +1,6 @@
 import math
 
-
-from test_utils import utils
+from alg.test_utils import utils
 
 
 class Heap:

@@ -1,6 +1,7 @@
-from test_utils import utils
+from alg.test_utils import utils
 
 
+@utils.test_wrapper
 def insert_sort(a):
     """insertion sort alg implementation"""
     size = len(a)
@@ -18,5 +19,3 @@ def insert_sort(a):
         else:
             a[0] = key_to_insert
     return a
-
-utils.test_sort_fun(insert_sort)

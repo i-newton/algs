@@ -1,4 +1,5 @@
-from test_utils import utils
+from alg.test_utils import utils
+import random
 
 
 def partition(a, start, end):
@@ -13,6 +14,13 @@ def partition(a, start, end):
     return less_div + 1
 
 
+def randomized_partition(a, start, end):
+    if start < end:
+        div = random.randint(start, end)
+        a[end], a[div] = a[div], a[end]
+    return partition(a, start, end)
+
+
 def quick_sort_impl(a, start, end):
     if start < end:
         delimeter = partition(a, start, end)
@@ -20,10 +28,7 @@ def quick_sort_impl(a, start, end):
         quick_sort_impl(a, delimeter + 1, end)
 
 
+@utils.test_wrapper
 def quick_sort(a):
     quick_sort_impl(a, 0, len(a) - 1)
     return a
-
-
-if __name__ == "__main__":
-    utils.test_sort_fun(quick_sort)
