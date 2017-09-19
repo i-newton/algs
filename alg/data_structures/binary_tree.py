@@ -86,6 +86,14 @@ class BinaryTree:
             dig.parent.right = plant
         if plant:
             plant.parent = dig.parent
+            size_delta = dig.size - plant.size
+        else:
+            size_delta = 1
+        if size_delta != 0:
+            p = dig.parent
+            while p:
+                p.size -= size_delta
+                p = p.parent
 
     def delete(self, node):
         #update sizes
@@ -126,10 +134,35 @@ class BinaryTree:
         return y
 
     def rank(self, node):
-        pass
+        if node.left:
+            r = len(node.left) + 1
+        else:
+            r = 1
+        while node != self.root:
+            if node == node.parent.right:
+                if node.parent.left:
+                    r += len(node.parent.left) + 1
+                else:
+                    r += 1
+            node = node.parent
+        return r
 
     def select(self, order):
-        pass
+        if len(self.root) <= order <= 0:
+            raise KeyError()
+        return self._select(order, self.root)
+
+    def _select(self, order, node):
+        less_count = 1
+        if node.left:
+            less_count += len(node.left)
+        if order == less_count:
+            return node
+        elif less_count > order:
+            return self._select(order, node.left)
+        else:
+            return self._select(order - less_count, node.right)
+
 
     @staticmethod
     def execute_for_subtree(root, func, *args, **kwargs):
@@ -155,7 +188,7 @@ class BinaryTree:
 
 if __name__ == "__main__":
     bt = BinaryTree()
-    for i in range(3):
+    for i in range(100):
         h = random.randint(0, 20000)
         bt.insert(Node(key=h))
     bt.print()
@@ -173,8 +206,8 @@ if __name__ == "__main__":
         print("S: " + str(bt.successor(i)))
         print("P: " + str(bt.predessor(i)))
     print("deleted")
+    for i in range(1,100):
+        print(bt.select(i))
+
     for i in ls:
-        bt.delete(i)
-        bt.print()
-
-
+        print(bt.rank(i))
