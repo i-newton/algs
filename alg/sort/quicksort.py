@@ -28,7 +28,11 @@ def quick_sort_impl(a, start, end):
         quick_sort_impl(a, delimeter + 1, end)
 
 
-@utils.test_wrapper
 def quick_sort(a):
     quick_sort_impl(a, 0, len(a) - 1)
-    return a
+    if a is not None:
+        return a
+    else:
+        return []
+
+utils.test_sort_fun(quick_sort)
