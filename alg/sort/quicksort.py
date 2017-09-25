@@ -1,7 +1,6 @@
 from alg.test_utils import utils
 import random
 
-
 def partition(a, start, end):
     delim = end
     less_div = start - 1
@@ -26,7 +25,6 @@ def quick_sort_impl(a, start, end):
         delimeter = partition(a, start, end)
         quick_sort_impl(a, start, delimeter - 1)
         quick_sort_impl(a, delimeter + 1, end)
-
 
 def quick_sort(a):
     quick_sort_impl(a, 0, len(a) - 1)
