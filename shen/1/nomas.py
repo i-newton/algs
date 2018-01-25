@@ -27,24 +27,29 @@ def pow(a, n):
     return res
 
 
-def test_pow():
-    r = pow(2, 6)
-    assert r == 64
-
-
-#1.1.4
-def pow_log(a,n):
+# 1.1.4
+def pow_log(a, n):
     res = 1
-    deg = 1
-    while deg < n:
-        a = a*a
-        if 2*deg > n:
-            pass
+    c = a
+    while n > 0:
+        if (n % 2) == 0:
+            n = n // 2
+            c = c * c
+        else:
+            res = res * c
+            n -= 1
     return res
+
+
+def test_pow(f):
+    r = f(2, 10)
+    assert r == 1024
+
+# 1.1.5
 
 
 if __name__ == "__main__":
     test_exchange(exchange)
     test_exchange(exchange_wo_nums)
-    test_pow()
-
+    test_pow(pow)
+    test_pow(pow_log)
